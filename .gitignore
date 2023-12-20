@@ -1,18 +1,69 @@
-# Build and Release Folders
-bin-debug/
-bin-release/
-[Oo]bj/
-[Bb]in/
+# Ignore les fichiers générés par Node.js
+node_modules/
 
-# Other files and folders
-.settings/
+# Ignore les fichiers de configuration spécifiques à l'utilisateur
+.npm
+.npmrc
+.yarn
+.yarnrc
+.yarn-integrity
 
-# Executables
-*.swf
-*.air
-*.ipa
-*.apk
+# Ignore les fichiers de configuration locaux
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-# should NOT be excluded as they contain compiler settings and other important
-# information for Eclipse / Flash Builder.
+# Ignore les fichiers de build et de logs
+/build/
+/.next/
+/out/
+/.nuxt/
+/dist/
+/.cache/
+/.circleci/
+/.vscode/
+/.idea/
+/.DS_Store
+/Thumbs.db
+
+# Ignore les fichiers de logs
+*.log
+
+# Ignore les fichiers de statistiques et de profiling
+profile-*
+
+# Ignore les fichiers de sauvegarde
+*.bak
+*.swp
+*~.nib
+*.swp
+.DS_Store?
+
+# Ignore les fichiers temporaires
+*.tmp
+*.bak
+*.swp
+*~.nib
+*.swp
+
+# Ignore les fichiers de configuration de tests
+/coverage/
+/.nyc_output/
+
+# Ignore les fichiers de configuration de l'éditeur
+.vscode/
+.idea/
+
+# Ignore les fichiers de configuration de lint
+.eslintcache
+*.log
+
+# Ignore les fichiers de cache de Jest
+node_modules/.cache/
+
+# Ignore les fichiers de documentation
+doc/
+
+# Ignore les fichiers générés par create-react-app
+/build/
