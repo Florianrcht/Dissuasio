@@ -1,14 +1,11 @@
-const express = require("express");
+const express = require('express');
 const app = express();
-const cors = require("cors");
-const PORT = 3001;
+const port = 3000;
 
-app.use(cors());
-
-app.get("/api/home", (req, res) => {
-  res.json({ message: "Like this video!", people: ["Arpan", "Jack", "Barry"] });
+app.get('/', (req, res) => {
+  res.send('Hello World!');
 });
 
-app.listen(PORT, () => {
-  console.log(`Server started on port ${PORT}`); 
-})
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Server listening at http://0.0.0.0:${port}`);
+});
