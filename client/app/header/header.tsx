@@ -7,7 +7,11 @@ const Header: React.FC = () => {
             <div className='header_div'>
                 <a href="#">ACCUEIL</a>
                 <a href="#">NOS BASES</a>
-                <h1>Dissuasio</h1>
+                <h1>
+                    <span className="dis">DIS</span>
+                    <span className="sua">SUA</span>
+                    <span className="sio">SIO</span>
+                </h1>                
                 <a href="#">ACTU</a>
                 <a href="#">OPEX</a>
             </div>
