@@ -1,0 +1,22 @@
+footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+.footer_div{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1%;
+    padding-left: 3%;
+    padding-right: 3%;
+}
+.footer_div_right{
+    display: flex;
+    flex-direction: column;
+}
+.footer_border{
+    position: relative;
+    border-top: solid 1px;
+    left: 3%;
+    width: 93%;
+}
