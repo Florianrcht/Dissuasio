@@ -1,9 +1,28 @@
 import React from 'react';
+import './footer.css';
 
 const Footer: React.FC = () => {
     return (
         <footer>
-            <p>© 2024 Dispeo</p>
+            <div className='header_border'></div>
+            <div className='footer_div'>
+                <div className='footer_div_left'>
+                    <h1>
+                        <span className="dis">DIS</span>
+                        <span className="sua">SUA</span>
+                        <span className="sio">SIO</span>
+                    </h1>
+                    <p>© 2024 Dissuasio</p>
+                </div>
+                <div className='footer_div_right'>
+                    <ul>
+                        <li><a href="#">ACCUEIL</a></li>
+                        <li><a href="#">NOS BASES</a></li>
+                        <li><a href="#">ACTU</a></li>
+                        <li><a href="#">OPEX</a></li>
+                    </ul>
+                </div>
+            </div>
         </footer>
     );
 };
