@@ -2,3 +2,10 @@
     padding-left: 3%;
     padding-right: 3%;
 }
+
+.filtre_container, .filtres{
+    display: flex;
+}
+.filtres > li{
+    margin-left: 3%;
+}
