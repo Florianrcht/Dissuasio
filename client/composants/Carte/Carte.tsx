@@ -7,8 +7,14 @@ import MarkerShadow from '../../node_modules/leaflet/dist/images/marker-shadow.p
 import 'leaflet/dist/leaflet.css'
 
 const Carte = () => {
-    const mapboxStyleUrl = 'https://api.mapbox.com/styles/v1/florianrcht/clsg8r9fi005c01qudnepavb2.html?title=view&access_token=pk.eyJ1IjoiZmxvcmlhbnJjaHQiLCJhIjoiY2xka2p4NG5pMXdoZDNwdDU0ampyMnN6NSJ9.3RuMtRpGhlzYW-W9the7vA&zoomwheel=true&fresh=true#11/40.73/-74'
 
+    const username = process.env.NEXT_PUBLIC_USERNAME;
+    const styleId = process.env.NEXT_PUBLIC_STYLE_ID;
+    const accessToken = process.env.NEXT_PUBLIC_ACCESS_TOKEN;
+
+    const carteDarkUrl = `https://api.mapbox.com/styles/v1/${username}/${styleId}/tiles/256/{z}/{x}/{y}?access_token=${accessToken}&zoomwheel=true&fresh=true`;
+
+    
   return (
     <div>
       <p>Carte</p>
@@ -18,7 +24,7 @@ const Carte = () => {
       }} center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}
       >
       <TileLayer
-        url={mapboxStyleUrl}
+        url={carteDarkUrl}
         attribution='Map tiles by <a href="https://stamen.com/">Stamen Design</a>, under <a href="https://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="https://openstreetmap.org">OpenStreetMap</a>, under <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.'
       />
 
