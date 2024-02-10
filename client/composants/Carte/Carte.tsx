@@ -7,6 +7,8 @@ import MarkerShadow from '../../node_modules/leaflet/dist/images/marker-shadow.p
 import 'leaflet/dist/leaflet.css'
 
 const Carte = () => {
+    const mapboxStyleUrl = 'https://api.mapbox.com/styles/v1/florianrcht/clsg8r9fi005c01qudnepavb2.html?title=view&access_token=pk.eyJ1IjoiZmxvcmlhbnJjaHQiLCJhIjoiY2xka2p4NG5pMXdoZDNwdDU0ampyMnN6NSJ9.3RuMtRpGhlzYW-W9the7vA&zoomwheel=true&fresh=true#11/40.73/-74'
+
   return (
     <div>
       <p>Carte</p>
@@ -15,10 +17,10 @@ const Carte = () => {
         width: "100%"
       }} center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}
       >
-        <TileLayer 
-            attribution="&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a>"
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
+      <TileLayer
+        url={mapboxStyleUrl}
+        attribution='Map tiles by <a href="https://stamen.com/">Stamen Design</a>, under <a href="https://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="https://openstreetmap.org">OpenStreetMap</a>, under <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.'
+      />
 
         <Marker icon={
             new L.Icon({

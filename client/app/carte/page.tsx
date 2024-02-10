@@ -1,16 +1,18 @@
-import React from 'react'
-import './carte.css'
-import Carte from '../../composants/Carte/Carte'
+import React from 'react';
+import dynamic from 'next/dynamic';
 
+const DynamicMap = dynamic(() => import('../../composants/Carte/Carte'), {
+  ssr: false
+});
 
-const carte = (props: any) => {
-  const { position, zoom } = props
+const CartePage = (props: any) => {
+  const { position, zoom } = props;
 
   return (
     <main className="main_carte">      
-      <Carte  />
+      <DynamicMap />
     </main>
-  )
+  );
 }
 
-export default carte
+export default CartePage;
