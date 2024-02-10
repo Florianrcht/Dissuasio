@@ -17,7 +17,7 @@ client/.env
 
 # Ignore les fichiers de build et de logs
 /build/
-/.next/
+client/.next/
 /out/
 /.nuxt/
 /dist/
