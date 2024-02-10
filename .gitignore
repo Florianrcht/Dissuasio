@@ -13,6 +13,7 @@ node_modules/
 .env.development.local
 .env.test.local
 .env.production.local
+client/.env
 
 # Ignore les fichiers de build et de logs
 /build/
@@ -67,3 +68,4 @@ doc/
 
 # Ignore les fichiers générés par create-react-app
 /build/
+client/.env
