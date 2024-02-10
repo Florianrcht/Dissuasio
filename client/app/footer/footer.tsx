@@ -16,10 +16,10 @@ const Footer: React.FC = () => {
                 </div>
                 <div className='footer_div_right'>
                     <ul>
-                        <li><a href="#">ACCUEIL</a></li>
-                        <li><a href="#">NOS BASES</a></li>
-                        <li><a href="#">ACTU</a></li>
-                        <li><a href="#">OPEX</a></li>
+                        <li><a href="/">ACCUEIL</a></li>
+                        <li><a href="/carte">NOS BASES</a></li>
+                        <li><a href="/actu">ACTU</a></li>
+                        <li><a href="/opex">OPEX</a></li>
                     </ul>
                 </div>
             </div>
