@@ -1,6 +1,4 @@
 footer{
-    position: absolute;
-    bottom: 0;
     width: 100%;
 }
 .footer_div{
@@ -9,6 +7,8 @@ footer{
     padding-top: 1%;
     padding-left: 3%;
     padding-right: 3%;
+    position: relative;
+    bottom: 0;
 }
 .footer_div_right{
     display: flex;

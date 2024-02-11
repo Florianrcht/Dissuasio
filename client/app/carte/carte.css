@@ -6,6 +6,10 @@
 .filtre_container, .filtres{
     display: flex;
 }
+.filtres{
+    flex:19;
+    justify-content: space-evenly;
+    list-style: none;
+}
 .filtres > li{
-    margin-left: 3%;
 }

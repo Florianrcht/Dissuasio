@@ -20,10 +20,24 @@ const Carte = () => {
   const carteDarkUrl = `https://api.mapbox.com/styles/v1/${username}/${styleId}/tiles/256/{z}/{x}/{y}?access_token=${accessToken}&zoomwheel=true&fresh=true`;
 
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
-  const filters = [
-    { name: "Bases Armée de Terre", key: "armeeTerre" },
+  const filtres = [
+    {
+      name: "Unités Armée de Terre",
+      key: "unitesArmeeTerre",
+      subfilters: [
+        { name: "Arme Blindée Cavalerie", key: "armeBlindeeCavalerie" },
+        { name: "Artillerie", key: "armeArtillerie" },
+        { name: "Aviation Légère de l'Armée de Terre (ALAT)", key: "armeAlat" },
+        { name: "Génie", key: "armeGenie" },
+        { name: "Infanterie", key: "armeInfanterie" },
+        { name: "Matériel", key: "armeMateriel" },
+        { name: "Service de Santé", key: "armeServiceSante" },
+        { name: "Train", key: "armeTrain" },
+        { name: "Transmission", key: "armeTransmission" },
+      ],
+    },
     { name: "Bases Marine Nationale", key: "marineNationale" },
-    { name: "Bases Armée de l'Air", key: "armeeAir" }
+    { name: "Bases Armée de l'Air", key: "armeeAir" },
   ];
 
   return (
@@ -32,26 +46,26 @@ const Carte = () => {
       <div className="filtre_container">
         <h3>Filtres :</h3>
         <ul className="filtres">
-          {filters.map((filter) => (
-            <li key={filter.key}>
-              <label>
+          {filtres.map((filtre) => (
+            <li key={filtre.key}>
+            <label>
                 <input
-                  type="checkbox"
-                  value={filter.key}
-                  checked={selectedFilters.includes(filter.key)}
-                  onChange={(e) => {
+                type="checkbox"
+                value={filtre.key}
+                checked={selectedFilters.includes(filtre.key)}
+                onChange={(e) => {
                     const { value } = e.target;
                     setSelectedFilters((prevFilters) =>
-                      prevFilters.includes(value)
+                    prevFilters.includes(value)
                         ? prevFilters.filter((f) => f !== value)
                         : [...prevFilters, value]
                     );
-                  }}
+                }}
                 />
-                {filter.name}
-              </label>
+                {filtre.name}
+            </label>
             </li>
-          ))}
+        ))}
         </ul>
       </div>
       <div className="map-container">
@@ -64,6 +78,7 @@ const Carte = () => {
           zoom={6}
           scrollWheelZoom={true}
         >
+
           <TileLayer
             url={carteDarkUrl}
             attribution="OpenStreetMap, Mapbox, LeafLet"
@@ -72,32 +87,99 @@ const Carte = () => {
           <LayerGroup>
             {selectedFilters.map((filterKey) => {
               switch (filterKey) {
-                case "armeeTerre":
+                case "unitesArmeeTerre":
                   return (
+                    <>
+
+                    {/*3e RIMa*/}
                     <Marker
-                      key={filterKey}
-                      icon={
-                        new L.Icon({
-                          iconUrl: MarkerIcon.src,
-                          iconSize: [30, 30],
-                          iconAnchor: [20, 20],
-                          popupAnchor: [0, -41]
-                        })
-                      }
-                      position={[47.6593523115151, -2.7447110708501414]}
-                    >
-                      <Popup>
-                        <a
-                          href="https://www.sengager.fr/regiments/3e-regiment-dinfanterie-de-marine"
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          3e RIMa (Régiment d'Infanterie de Marine)
-                        </a>
-                      </Popup>
-                    </Marker>
+                          key={filterKey}
+                          icon={new L.Icon({
+                              iconUrl: MarkerIcon.src,
+                              iconSize: [30, 30],
+                              iconAnchor: [20, 20],
+                              popupAnchor: [0, -41]
+                          })}
+                          position={[47.6593523115151, -2.7447110708501414]}
+                      >
+                          <Popup>
+                              <a
+                                  href="https://www.sengager.fr/regiments/3e-regiment-dinfanterie-de-marine"
+                                  target="_blank"
+                                  rel="noreferrer"
+                              >
+                                  3e RIMa (Régiment d'Infanterie de Marine)
+                              </a>
+                          </Popup>
+                      </Marker>
+                      
+                      {/*2e regiment du materiel*/}
+                      <Marker
+                          key={filterKey}
+                          icon={new L.Icon({
+                              iconUrl: MarkerIcon.src,
+                              iconSize: [30, 30],
+                              iconAnchor: [20, 20],
+                              popupAnchor: [0, -41]
+                          })}
+                          position={[48.0311864,-1.7522039,17]}
+                      >
+                              <Popup>
+                                  <a
+                                      href="https://www.sengager.fr/regiments/2e-regiment-du-materiel"
+                                      target="_blank"
+                                      rel="noreferrer"
+                                  >
+                                      2e Régiment du Matériel
+                                  </a>
+                              </Popup>
+                          </Marker>
+                          
+                            {/*COMSIC*/}
+                            <Marker
+                                key={filterKey}
+                                icon={new L.Icon({
+                                    iconUrl: MarkerIcon.src,
+                                    iconSize: [30, 30],
+                                    iconAnchor: [20, 20],
+                                    popupAnchor: [0, -41]
+                                })}
+                                position={[48.1209786,-1.6301283,17]}
+                            >
+                                <Popup>
+                                    <a
+                                        href="https://www.defense.gouv.fr/terre/nos-unites/niveau-divisionnaire/commandement-sic"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
+                                        COMSIC (Commandement des SIC)
+                                    </a>
+                                </Popup>
+                            </Marker>
+
+                            {/*6E RÉGIMENT DU GÉNIE*/}
+                            <Marker
+                                key={filterKey}
+                                icon={new L.Icon({
+                                    iconUrl: MarkerIcon.src,
+                                    iconSize: [30, 30],
+                                    iconAnchor: [20, 20],
+                                    popupAnchor: [0, -41]
+                                })}
+                                position={[48.1209786,-1.6301283,17]}
+                            >
+                                <Popup>
+                                    <a
+                                        href="https://www.sengager.fr/regiments/6e-regiment-du-genie"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
+                                        6e Régiment du Génie
+                                    </a>
+                                </Popup>
+                            </Marker>
+                          </>
                   );
-                // Ajoutez d'autres cas pour les filtres supplémentaires ici
                 default:
                   return null;
               }

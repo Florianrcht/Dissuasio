@@ -6,7 +6,7 @@ const Header: React.FC = () => {
         <header>
             <div className='header_div'>
                 <a href="/">ACCUEIL</a>
-                <a href="/carte">NOS BASES</a>
+                <a href="/carte">CARTE</a>
                 <h1>
                     <span className="dis">DIS</span>
                     <span className="sua">SUA</span>
