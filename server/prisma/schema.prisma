@@ -11,12 +11,13 @@ datasource db {
 }
 
 model unites_armee_terre {
-  id       Int      @id @default(autoincrement())
-  nom      String  
-  liens    String
-  lat      String
-  long     String
-  arme     String
+  id          Int      @id @default(autoincrement())
+  nom         String  
+  liens       String
+  lat         String
+  long        String
+  arme        String
+  arme_filtre String
 
   create DateTime @default(now())
   update DateTime @updatedAt

@@ -134,7 +134,7 @@ const [unitesArmeeTerre, setUnitesArmeeTerre] = useState<UniteArmeeTerre[]>([]);
                 <Popup>
                     <div>
                     <a href={units.liens}>{units.nom}</a>
-                    <p> - {units.arme}</p>
+                    <p> {units.arme}</p>
                     </div>
                 </Popup>
                 </Marker>
