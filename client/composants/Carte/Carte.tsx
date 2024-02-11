@@ -1,6 +1,6 @@
 
 'use client'
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import L from "leaflet";
 import {
   MapContainer,
@@ -18,6 +18,16 @@ const Carte = () => {
   const accessToken = process.env.NEXT_PUBLIC_ACCESS_TOKEN;
 
   const carteDarkUrl = `https://api.mapbox.com/styles/v1/${username}/${styleId}/tiles/256/{z}/{x}/{y}?access_token=${accessToken}&zoomwheel=true&fresh=true`;
+
+  const [unitesArmeeTerre, setUnitesArmeeTerre] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:3001/api/unites-armee-terre')
+      .then(response => response.json())
+      .then(data => setUnitesArmeeTerre(data))
+      .catch(error => console.error(error));
+  }, []);
+  console.log(unitesArmeeTerre);
 
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const filtres = [
