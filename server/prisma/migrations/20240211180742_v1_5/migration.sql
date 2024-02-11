@@ -6,8 +6,8 @@ CREATE TABLE "new_unites_armee_terre" (
     "liens" TEXT NOT NULL,
     "lat" TEXT NOT NULL,
     "long" TEXT NOT NULL,
-    "arme" TEXT NOT NULL,
-    "arme_filtre" TEXT NOT NULL,
+    "arme" TEXT NOT NULL DEFAULT 'Arme Blindée Cavalerie',
+    "arme_filtre" TEXT NOT NULL DEFAULT 'arme_blindee_cavalerie',
     "create" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "update" DATETIME NOT NULL
 );
