@@ -19,7 +19,29 @@ const Carte = () => {
 
   const carteDarkUrl = `https://api.mapbox.com/styles/v1/${username}/${styleId}/tiles/256/{z}/{x}/{y}?access_token=${accessToken}&zoomwheel=true&fresh=true`;
 
-  const [unitesArmeeTerre, setUnitesArmeeTerre] = useState([]);
+  type UniteArmeeTerre = {
+    id: number;
+    arme: string;
+    create: string;
+    lat: string;
+    liens: string;
+    long: string;
+    nom: string;
+    update: string;
+  };
+
+  const toggleDisplayUnitesArmeeTerre = () => {
+    const elements = document.getElementsByClassName("unites_armee_terre");
+
+    for (let i = 0; i < elements.length; i++) {
+        const element = elements[i] as HTMLElement;
+        const currentDisplay = element.style.display || getComputedStyle(element).getPropertyValue('display');
+    
+        element.style.display = currentDisplay === 'none' ? 'block' : 'none';
+      }
+};
+
+const [unitesArmeeTerre, setUnitesArmeeTerre] = useState<UniteArmeeTerre[]>([]);
 
   useEffect(() => {
     fetch('http://localhost:3001/api/unites-armee-terre')
@@ -29,7 +51,7 @@ const Carte = () => {
   }, []);
   console.log(unitesArmeeTerre);
 
-  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
+  const [selectedFilters, setSelectedFilters] = useState<string[]>(["unitesArmeeTerre"]); 
   const filtres = [
     {
       name: "Unités Armée de Terre",
@@ -50,6 +72,7 @@ const Carte = () => {
     { name: "Bases Armée de l'Air", key: "armeeAir" },
   ];
 
+  
   return (
     <div className="carte_container">
       <p>Carte</p>
@@ -58,24 +81,28 @@ const Carte = () => {
         <ul className="filtres">
           {filtres.map((filtre) => (
             <li key={filtre.key}>
-            <label>
+              <label>
                 <input
-                type="checkbox"
-                value={filtre.key}
-                checked={selectedFilters.includes(filtre.key)}
-                onChange={(e) => {
-                    const { value } = e.target;
-                    setSelectedFilters((prevFilters) =>
-                    prevFilters.includes(value)
-                        ? prevFilters.filter((f) => f !== value)
-                        : [...prevFilters, value]
+                  type="checkbox"
+                  value={filtre.key}
+                  checked={selectedFilters.includes(filtre.key)}
+                  defaultChecked={true}
+                  onChange={() => {
+                    const { key } = filtre;
+                    setSelectedFilters(prevFilters =>
+                      prevFilters.includes(key)
+                        ? prevFilters.filter(f => f !== key)
+                        : [...prevFilters, key]
                     );
-                }}
+                    if (key === "unitesArmeeTerre") {
+                      toggleDisplayUnitesArmeeTerre();
+                    }
+                  }}
                 />
                 {filtre.name}
-            </label>
+              </label>
             </li>
-        ))}
+          ))}
         </ul>
       </div>
       <div className="map-container">
@@ -88,113 +115,30 @@ const Carte = () => {
           zoom={6}
           scrollWheelZoom={true}
         >
-
           <TileLayer
             url={carteDarkUrl}
             attribution="OpenStreetMap, Mapbox, LeafLet"
           />
 
-          <LayerGroup>
-            {selectedFilters.map((filterKey) => {
-              switch (filterKey) {
-                case "unitesArmeeTerre":
-                  return (
-                    <>
-
-                    {/*3e RIMa*/}
-                    <Marker
-                          key={filterKey}
-                          icon={new L.Icon({
-                              iconUrl: MarkerIcon.src,
-                              iconSize: [30, 30],
-                              iconAnchor: [20, 20],
-                              popupAnchor: [0, -41]
-                          })}
-                          position={[47.6593523115151, -2.7447110708501414]}
-                      >
-                          <Popup>
-                              <a
-                                  href="https://www.sengager.fr/regiments/3e-regiment-dinfanterie-de-marine"
-                                  target="_blank"
-                                  rel="noreferrer"
-                              >
-                                  3e RIMa (Régiment d'Infanterie de Marine)
-                              </a>
-                          </Popup>
-                      </Marker>
-                      
-                      {/*2e regiment du materiel*/}
-                      <Marker
-                          key={filterKey}
-                          icon={new L.Icon({
-                              iconUrl: MarkerIcon.src,
-                              iconSize: [30, 30],
-                              iconAnchor: [20, 20],
-                              popupAnchor: [0, -41]
-                          })}
-                          position={[48.0311864,-1.7522039,17]}
-                      >
-                              <Popup>
-                                  <a
-                                      href="https://www.sengager.fr/regiments/2e-regiment-du-materiel"
-                                      target="_blank"
-                                      rel="noreferrer"
-                                  >
-                                      2e Régiment du Matériel
-                                  </a>
-                              </Popup>
-                          </Marker>
-                          
-                            {/*COMSIC*/}
-                            <Marker
-                                key={filterKey}
-                                icon={new L.Icon({
-                                    iconUrl: MarkerIcon.src,
-                                    iconSize: [30, 30],
-                                    iconAnchor: [20, 20],
-                                    popupAnchor: [0, -41]
-                                })}
-                                position={[48.1209786,-1.6301283,17]}
-                            >
-                                <Popup>
-                                    <a
-                                        href="https://www.defense.gouv.fr/terre/nos-unites/niveau-divisionnaire/commandement-sic"
-                                        target="_blank"
-                                        rel="noreferrer"
-                                    >
-                                        COMSIC (Commandement des SIC)
-                                    </a>
-                                </Popup>
-                            </Marker>
-
-                            {/*6E RÉGIMENT DU GÉNIE*/}
-                            <Marker
-                                key={filterKey}
-                                icon={new L.Icon({
-                                    iconUrl: MarkerIcon.src,
-                                    iconSize: [30, 30],
-                                    iconAnchor: [20, 20],
-                                    popupAnchor: [0, -41]
-                                })}
-                                position={[48.1209786,-1.6301283,17]}
-                            >
-                                <Popup>
-                                    <a
-                                        href="https://www.sengager.fr/regiments/6e-regiment-du-genie"
-                                        target="_blank"
-                                        rel="noreferrer"
-                                    >
-                                        6e Régiment du Génie
-                                    </a>
-                                </Popup>
-                            </Marker>
-                          </>
-                  );
-                default:
-                  return null;
-              }
-            })}
-          </LayerGroup>
+            {unitesArmeeTerre.map((units) => (
+                <Marker
+                icon={new L.Icon({
+                    className: 'unites_armee_terre',
+                    iconUrl: MarkerIcon.src,
+                    iconSize: [30, 30],
+                    iconAnchor: [20, 20],
+                    popupAnchor: [0, -41],
+                })}
+                position={[parseFloat(units.lat), parseFloat(units.long)]}
+                >
+                <Popup>
+                    <div>
+                    <a href={units.liens}>{units.nom}</a>
+                    <p> - {units.arme}</p>
+                    </div>
+                </Popup>
+                </Marker>
+            ))}
         </MapContainer>
       </div>
     </div>
