@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
                 <div className='footer_div_right'>
                     <ul>
                         <li><a href="/">ACCUEIL</a></li>
-                        <li><a href="/carte">CARTE</a></li>
+                        <li><a href="/unites">UNITÉS</a></li>
                         <li><a href="/actu">ACTU</a></li>
                         <li><a href="/opex">OPEX</a></li>
                     </ul>
