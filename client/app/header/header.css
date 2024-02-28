@@ -1,9 +1,11 @@
 .header_div{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     padding-top: 1%;
     padding-bottom: 1%;
+    background-color: #013A40;
+    height: 70px;
 }
 .header_border{
     position: relative;
@@ -11,15 +13,120 @@
     left: 3%;
     width: 93%;
 }
-
-.dis{
-    color: #03417b; /* Bleu */
+.div_h1_header{
+    text-align: center;
+    margin-left: 3%;
+    padding: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+    /*border: solid 1px white;
+    border-radius: 30px;
+    border-color: black;
+    background-color: rgb(255, 255, 255);*/
 }
-.sua{
-    color: white; /* Bleu */
+.div_a_header{
+    display: flex;
+    justify-content: space-evenly;
+    width: 40%;
 }
-.sio{
-    color: #84050e; /* Bleu */
-}
+body {
+    font-size: 16px;
+  }
   
+  .header_div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1% 3%;
+    background-color: #013A40;
+    height: 70px;
+  }
+  
+  .header_border {
+    position: relative;
+    border-bottom: solid 1px;
+    width: 93%;
+  }
+  
+  .div_h1_header {
+    text-align: center;
+    margin-left: 3%;
+    padding: 4px 10px;
+  }
+  
+  :root {
+    --primary-blue: #03417b;
+    --dark-red: #84050e;
+  }
+  
+  :root {
+    --transition-duration: 0.7s;
+  }
+  
+  .dis {
+    color: var(--primary-blue);
+  }
+  
+  .sua {
+    color: white;
+  }
+  
+  .sio {
+    color: var(--dark-red);
+  }
+  
+  .login,
+  .register {
+    padding: 10px 14px;
+    border: solid 2px white;
+    border-radius: 30px;
+    transition: 
+        background-color var(--transition-duration),
+        color var(--transition-duration);
+  }
+  
+  .register {
+    visibility: hidden;
+  }
+  
+  .login:hover {
+    background-color: #c5eff3;
+    color: black;
+  }
+  
+  .register:hover,
+  .register:hover .login {
+    background-color: #013A40 !important;
+    color: white !important;
+  }
+  
+  .bouton_header {
+    color: white;
+    padding: 10px 14px;
+    border: solid 2px white;
+    background-color: #013A40;
+    border-radius: 30px;
+    transition: 
+        background-color var(--transition-duration),
+        color var(--transition-duration);
+  }
+  
+  .bouton_header:hover {
+    background-color: white;
+    color: black;
+  }
+  .bouton_connexion_header {
+    width: 15%;
+  }
+  .bouton_connexion_header:hover .register {
+    background-color: #013A40;
+    opacity: 1;
+    visibility: visible;
+    width: 30%;
+  }
+  
+  .register:hover {
+    background-color: #c5eff3 !important;
+    color: black;
+  }
   

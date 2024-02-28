@@ -6,20 +6,27 @@ const Header: React.FC = () => {
     return (
         <header>
             <div className='header_div'>
-                <a href="/">ACCUEIL</a>
-                <a href="/unites">PROPOS</a>
-                <a href="/unites">UNITÉS</a>
-                <h1>
-                    <a href="/" className="dis">DIS</a>
-                    <a href="/" className="sua">SUA</a>
-                    <a href="/" className="sio">SIO</a>
-                </h1>                
-                <a href="/actu">ACTU</a>
-                <a href="/opex">OPEX</a>
-                <a href="/unites">CONNEXION</a>
+                <div className='div_h1_header'>
+                    <h1 className='h1_header'>
+                        <a href="/" className="dis">DIS</a>
+                        <a href="/" className="sua">SUA</a>
+                        <a href="/" className="sio">SIO</a>
+                    </h1>  
+                </div>
+                <div className='div_a_header'>
+                    <div>
+                        <a className="bouton_header" href="/">Accueil</a>
+                    </div>
+                    <div>
+                        <a className="bouton_header" href="/unites">Services</a>
+                    </div>
+                    <div className='bouton_connexion_header'>
+                        <a className="login" href="/login">Connexion</a>
+                        <a className="register" href="/register">Inscription</a>
+                    </div>
+                </div>
             </div>
-            <div className='header_border'>
-            </div>
+
             <UserButton />
         </header>
     );
