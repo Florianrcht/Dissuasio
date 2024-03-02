@@ -21,8 +21,7 @@ const Header: React.FC = () => {
                         <a className="bouton_header" href="/unites">Services</a>
                     </div>
                     <div className='bouton_connexion_header'>
-                        <a className="login" href="/login">Connexion</a>
-                        <a className="register" href="/register">Inscription</a>
+                        <a className="login" href="/https://noted-halibut-60.accounts.dev/sign-in?redirect_url=http%3A%2F%2Flocalhost%3A3000%2Flogin">Connexion</a>
                     </div>
                 </div>
             </div>
