@@ -3,8 +3,10 @@ footer{
 }
 .footer_div{
     display: flex;
+    background-color: #242830;
     justify-content: space-between;
     padding-top: 1%;
+    padding-bottom: 1%;
     padding-left: 3%;
     padding-right: 3%;
     position: relative;

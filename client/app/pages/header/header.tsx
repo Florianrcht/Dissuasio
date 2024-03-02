@@ -25,8 +25,8 @@ const Header: React.FC = () => {
                     </div>
                 </div>
             </div>
-
             <UserButton />
+            <div className='header_border'></div>
         </header>
     );
 };
