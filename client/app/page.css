@@ -87,9 +87,12 @@ h1{
 .div_2_center{
     flex:1;
 }
-
-.div_2_h1{
-    float: right;
+.p_selected{
+    border: solid 2px #242830;
+    border-radius: 30px;
+}
+.div_2_p p{
+    padding: 15px;
 }
 .div_2_p{
     border: solid;

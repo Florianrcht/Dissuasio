@@ -1,7 +1,45 @@
+'use client';
 import React from "react";
 import "./page.css";
+import "../public/map_img.png";
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 export default function Home() {
+  const services = [
+    { nom: "Unités", img_url: "map_img.png", value: "/unites" },
+    { nom: "Actualités", img_url: "map_img.png", value: "/actualites" },
+    { nom: "OPEX", img_url: "map_img.png", value: "/opex" },
+  ];
+
+  const [count, setCount] = React.useState(0);
+  const service = services[count];
+
+  const handleChangeService = (step: number) => {
+    const newCount = count + step;
+    console.log(newCount);
+
+    if (newCount >= 0 && newCount < services.length) {
+      setCount(newCount);
+    }
+    if(newCount === 3){
+      setCount(0)
+    }
+    if(newCount === -1){
+      setCount(2)
+    }
+
+    const ps = document.querySelectorAll('.div_2_p p');
+    ps.forEach((p, index) => {
+      p.classList.remove('p_selected');
+    });
+
+    const pSelected = document.querySelector(`.p_${newCount}`);
+    if (pSelected) {
+      pSelected.classList.add('p_selected');
+    }
+  };
+
+
   return (
     <main className="main_accueil">
       <br/>
@@ -15,7 +53,7 @@ export default function Home() {
             <br/>
             <br/>
             <div className="div_1_button">
-              <a href="/carte" className="div_1_boutons">Unités</a>
+              <a href="/unites" className="div_1_boutons">Unités</a>
               <a href="/actualites" className="div_1_boutons">Actualités</a>
               <a href="/opex" className="div_1_boutons">OPEX</a>
             </div>
@@ -33,13 +71,32 @@ export default function Home() {
       <div className="div_2">
         <div className="body_div_2">
           <div className="div_2_left">
-            <p className="div_2_p">Retrouvez, partagez, découvrez toutes les actualités sur les 3 branches de l'Armée Française</p>
-          </div> 
-          <div className="div_2_center">
-            <img src="https://www.defense.gouv.fr/var/dicod/storage/images/base-de-medias/images/terre/actualites/2021/2021-05/le-1er-regiment-de-chasseurs-a-cheval-1er-rch-est-engage-dans-l-operation-barkhane/10616891-1-fre-FR/Le-1er-regiment-de-chasseurs-a-cheval-1er-RCh-est-engage-dans-l-operation-Barkhane.jpg"/>
+            <a href={service.value}><img src={service.img_url} alt="Service Image" /></a>
+            <div style={{display:'flex',justifyContent:'space-around'}}>
+            <div onClick={() => handleChangeService(-1)}>
+                <i className="bi bi-arrow-left-circle">  Précédent</i>
+              </div>
+              <div>
+                <i>{service.nom}</i>
+              </div>
+              <div style={{ display: "flex" }} onClick={() => handleChangeService(1)}>
+                <i style={{paddingRight:'8px'}}>Suivant</i>
+                <i className="bi bi-arrow-right-circle"></i>
+              </div>
+            </div>
           </div>       
-          <div className="div_2_right">
-            <h1 className="div_2_h1"> Services &lt;&lt;</h1>
+          <div className="div_2_right" style={{display:'flex', flexDirection:"column", justifyContent:'space-between'}}>
+            <h1 className="div_2_h1" style={{display:'flex',flexDirection:'row-reverse'}}> Services &lt;&lt;</h1>
+            <div className="div_2_p">
+              <p>
+                Parcourez à travers le site :</p>
+                <br />
+                <p className="p_3 p_selected">-Unités : Carte interactive des bases Françaises</p>
+                <br />
+                <p className="p_1">-Actualités : Retrouvez les dernières informations sur l'Armée de Terre, Mer, Air</p>
+                <br />
+                <p className="p_2">-OPEX : La position et interactions des troupes Françaises à l'étranger</p>
+            </div>
           </div>
         </div>
       </div>
