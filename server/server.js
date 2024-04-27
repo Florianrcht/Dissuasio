@@ -4,9 +4,11 @@ const port = 3001;
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 const cors = require('cors');
+require('dotenv').config();
 
 let bloqueCharge = 0;
 let compteurUnitesArmeeTerre = 0;
+let compteurtwitterPosts = 0;
 
 const getFormattedDate = () => {
   const now = new Date();
@@ -18,7 +20,7 @@ app.listen(port, '0.0.0.0', () => {
   console.log(`<Serveur Node écoute sur http://0.0.0.0:${port}>`);
 });
 
-
+//#region UNITES/CARTE
 app.get('/api/unites-armee-terre', async (req, res) => {
   bloqueCharge++; 
   try {
@@ -43,8 +45,6 @@ app.get('/api/unites-armee-terre', async (req, res) => {
   }
 });
 
-
-
 async function main() {
   try {
     const unites = await prisma.unites_armee_terre.findMany();
@@ -54,5 +54,45 @@ async function main() {
     await prisma.$disconnect();
   }
 }
+//#endregion UNITES/CARTE
+
+//#region ACTUALITES
+app.get('/api/PostTwitter/GetAll', async (req, res) => {
+  bloqueCharge++; 
+  try {
+    if (bloqueCharge%2 === 0) {
+    } else {
+        const twitterPosts = await prisma.post_twitter.findMany();
+        console.log(`==> SUCCES POST TWITTER | GET PRISMA post_twitter | ${getFormattedDate()} | ${twitterPosts.length} Éléments`);
+      try {
+        res.json(twitterPosts);
+        console.log(`//> SUCCES POST TWITTER | SEND /api/PostTwitter/GetAll  | ${getFormattedDate()} | ${twitterPosts.length} Éléments`);
+      }
+      catch (e) {
+        console.log(`<// ERREUR POST TWITTER | GET /api/PostTwitter/GetAll    | ${getFormattedDate()}  | ${twitterPosts.length} Éléments | ` + e.message);
+        throw e;
+      }
+    }
+  }
+  catch (e) {
+    console.log('<== ERREUR | GET PRISMA post_twitter | ' + e.message);
+    throw e;
+  }
+});
+
+
+async function main() {
+  try {
+    const twitterPosts = await prisma.post_twitter.findMany();
+  } catch (e) {
+    throw e;
+  } finally {
+    await prisma.$disconnect();
+  }
+}
+//#endregion ACTUALITES
+
+
+
 
 main();

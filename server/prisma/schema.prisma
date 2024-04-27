@@ -22,3 +22,13 @@ model unites_armee_terre {
   create DateTime @default(now())
   update DateTime @updatedAt
 }
+
+model post_twitter {
+  id          Int      @id @default(autoincrement())
+  post_id     String
+  user        String
+  tags        String
+
+  create DateTime @default(now())
+  update DateTime @updatedAt
+}

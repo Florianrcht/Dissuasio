@@ -23,9 +23,6 @@ h1{
     display: flex;
     padding: 15px;
 }
-.div_1_right{
-    flex:1;
-}
 .div_1_left{
     flex:1;
 }

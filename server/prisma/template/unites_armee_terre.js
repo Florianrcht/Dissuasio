@@ -37,14 +37,14 @@ async function main() {
         arme: 'Arme Blindée Cavalerie',
         arme_filtre: 'arme_blindee_cavalerie',
       },
-        {
-            nom: '1er Régiment de Spahis',
-            liens: 'https://www.sengager.fr/regiments/1er-regiment-de-spahis',
-            lat: '44.927039012493836',
-            long: '4.9123718985914095',
-            arme: 'Arme Blindée Cavalerie',
-            arme_filtre: 'arme_blindee_cavalerie',
-        },
+      {
+          nom: '1er Régiment de Spahis',
+          liens: 'https://www.sengager.fr/regiments/1er-regiment-de-spahis',
+          lat: '44.927039012493836',
+          long: '4.9123718985914095',
+          arme: 'Arme Blindée Cavalerie',
+          arme_filtre: 'arme_blindee_cavalerie',
+      },
         
   ];
 

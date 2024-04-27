@@ -1,0 +1,16 @@
+{
+    "apps": [
+                {
+                "name": "server",
+                "script": "chemin_vers_votre_script_de_demarrage_du_serveur.js",
+                "watch": true, 
+                "autorestart": true 
+                },
+                {
+                "name": "client",
+                "script": "chemin_vers_votre_script_de_demarrage_du_client.js",
+                "watch": true,
+                "autorestart": true
+                }
+            ]
+}
