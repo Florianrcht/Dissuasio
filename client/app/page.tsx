@@ -3,6 +3,7 @@ import React from "react";
 import "./page.css";
 import "../public/map_img.png";
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import Image from 'next/image';
 
 export default function Home() {
   const services = [
@@ -49,7 +50,7 @@ export default function Home() {
           <div className="div_1_left">
             <h1> &gt;&gt; Dissuasio</h1>
             <br/>
-            <p className="div_1_p">Retrouvez, partagez, découvrez toutes les actualités sur les 3 branches de l'Armée Française</p>
+            <p className="div_1_p">Retrouvez, partagez, découvrez toutes les actualités sur les 3 branches de l&apos;Armée Française</p>
             <br/>
             <br/>
             <div className="div_1_button">
@@ -59,7 +60,7 @@ export default function Home() {
             </div>
           </div>        
           <div className="div_1_right">
-            <img src="https://beymedias.brightspotcdn.com/dims4/default/19c8cfe/2147483647/strip/false/crop/2500x1667+0+0/resize/1486x991!/quality/90/?url=http%3A%2F%2Fl-opinion-brightspot.s3.amazonaws.com%2Fa8%2Ffd%2Fbcd87e64446dbe3a67dea99b156e%2Farmee-de-terre-sipa.jpg"/>
+            <Image src="https://beymedias.brightspotcdn.com/dims4/default/19c8cfe/2147483647/strip/false/crop/2500x1667+0+0/resize/1486x991!/quality/90/?url=http%3A%2F%2Fl-opinion-brightspot.s3.amazonaws.com%2Fa8%2Ffd%2Fbcd87e64446dbe3a67dea99b156e%2Farmee-de-terre-sipa.jpg" alt="Image" />
           </div>
         </div>
       </div>
@@ -71,10 +72,10 @@ export default function Home() {
       <div className="div_2">
         <div className="body_div_2">
           <div className="div_2_left">
-            <a href={service.value}><img src={service.img_url} alt="Service Image" /></a>
+            <a href={service.value}><Image src={service.img_url} alt="Service Image" /></a>
             <div style={{display:'flex',justifyContent:'space-around'}}>
             <div onClick={() => handleChangeService(-1)}>
-                <i className="bi bi-arrow-left-circle">  Précédent</i>
+                <i className="bi bi-arrow-left-circle"> Précédent</i>
               </div>
               <div>
                 <i>{service.nom}</i>
@@ -93,9 +94,9 @@ export default function Home() {
                 <br />
                 <p className="p_3 p_selected">-Unités : Carte interactive des bases Françaises</p>
                 <br />
-                <p className="p_1">-Actualités : Retrouvez les dernières informations sur l'Armée de Terre, Mer, Air</p>
+                <p className="p_1">-Actualités : Retrouvez les dernières informations sur l&apos;Armée de Terre, Mer, Air</p>
                 <br />
-                <p className="p_2">-OPEX : La position et interactions des troupes Françaises à l'étranger</p>
+                <p className="p_2">-OPEX : La position et interactions des troupes Françaises à l&apos;étranger</p>
             </div>
           </div>
         </div>

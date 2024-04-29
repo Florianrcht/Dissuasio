@@ -24,7 +24,7 @@ const ActualitesPage = () => {
             <h1>Actualités</h1>
             <ul>
                 {tweets.map(tweet => (
-                    <Tweet id={tweet.post_id} />
+                    <Tweet key={tweet.id} id={tweet.post_id} />
                 ))}
             </ul>
         </>
