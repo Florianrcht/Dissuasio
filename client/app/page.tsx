@@ -60,7 +60,9 @@ export default function Home() {
             </div>
           </div>        
           <div className="div_1_right">
-            <Image src="https://beymedias.brightspotcdn.com/dims4/default/19c8cfe/2147483647/strip/false/crop/2500x1667+0+0/resize/1486x991!/quality/90/?url=http%3A%2F%2Fl-opinion-brightspot.s3.amazonaws.com%2Fa8%2Ffd%2Fbcd87e64446dbe3a67dea99b156e%2Farmee-de-terre-sipa.jpg" alt="Image" />
+            <img 
+              src="https://beymedias.brightspotcdn.com/dims4/default/19c8cfe/2147483647/strip/false/crop/2500x1667+0+0/resize/1486x991!/quality/90/?url=http%3A%2F%2Fl-opinion-brightspot.s3.amazonaws.com%2Fa8%2Ffd%2Fbcd87e64446dbe3a67dea99b156e%2Farmee-de-terre-sipa.jpg" 
+              alt="Image" />
           </div>
         </div>
       </div>
@@ -72,7 +74,9 @@ export default function Home() {
       <div className="div_2">
         <div className="body_div_2">
           <div className="div_2_left">
-            <a href={service.value}><Image src={service.img_url} alt="Service Image" /></a>
+            <a href={service.value}><img 
+                                      src={service.img_url}
+                                      alt="Service Image" /></a>
             <div style={{display:'flex',justifyContent:'space-around'}}>
             <div onClick={() => handleChangeService(-1)}>
                 <i className="bi bi-arrow-left-circle"> Précédent</i>

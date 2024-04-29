@@ -44,11 +44,12 @@ const Carte = () => {
 const [unitesArmeeTerre, setUnitesArmeeTerre] = useState<UniteArmeeTerre[]>([]);
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/unites-armee-terre')
+    fetch('http://0.0.0.0:3001/api/Unites/Terre/GetAll')
       .then(response => response.json())
       .then(data => setUnitesArmeeTerre(data))
       .catch(error => console.error(error));
   }, []);
+  console.log(unitesArmeeTerre);
 
   const [selectedFilters, setSelectedFilters] = useState<string[]>(["unitesArmeeTerre"]); 
   const filtres = [
