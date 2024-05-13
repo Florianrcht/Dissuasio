@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { Tweet } from 'react-tweet';
 
+
 const ActualitesPage = () => {
     type PostTwitter = {
         id: number;
@@ -13,7 +14,7 @@ const ActualitesPage = () => {
     const [tweets, setTweets] = useState<PostTwitter[]>([])
 
     useEffect(() => {
-        fetch('http://0.0.0.0:3001/api/PostTwitter/GetAll') 
+        fetch('https://dissuasio.fr:3001/api/PostTwitter/GetAll') 
             .then(response => response.json())
             .then(data => setTweets(data))
             .catch(error => console.error('Error fetching tweets:', error));
