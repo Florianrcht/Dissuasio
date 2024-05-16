@@ -1,6 +1,5 @@
 import './header.css';
 import React from 'react';
-import { UserButton } from "@clerk/nextjs";
 
 const Header: React.FC = () => {
     return (
@@ -25,7 +24,6 @@ const Header: React.FC = () => {
                     </div>
                 </div>
             </div>
-            <UserButton />
             <div className='header_border'></div>
         </header>
     );
