@@ -25,7 +25,7 @@ const getFormattedDate = () => {
   return `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`;
 };
 
-httpsServer.listen(port, '0.0.0.0', () => {
+app.listen(port, '0.0.0.0', () => {
   console.log(`<Serveur Node écoute sur http://0.0.0.0:${port}>`);
 });
 
@@ -61,7 +61,7 @@ async function main() {
 //#endregion UNITES/CARTE
 
 //#region ACTUALITES
-httpsServer.get('/api/PostTwitter/GetAll', async (req, res) => {
+app.get('/api/PostTwitter/GetAll', async (req, res) => {
   try {
         const twitterPosts = await prisma.post_twitter.findMany();
         console.log(`==> SUCCES POST TWITTER | GET ALL PRISMA post_twitter | ${getFormattedDate()} | ${twitterPosts.length} Éléments`);
