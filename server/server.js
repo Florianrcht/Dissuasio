@@ -5,23 +5,32 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 const cors = require('cors');
 require('dotenv').config();
+const fs = require('fs');
+const https = require('https');
 
 let bloqueCharge = 0;
 let compteurUnitesArmeeTerre = 0;
 let compteurtwitterPosts = 0;
+const privateKey = fs.readFileSync('/etc/letsencrypt/live/dissuasio.fr/privkey.pem', 'utf8');
+const certificate = fs.readFileSync('/etc/letsencrypt/live/dissuasio.fr/cert.pem', 'utf8');
+const ca = fs.readFileSync('/etc/letsencrypt/live/dissuasio.fr/chain.pem', 'utf8');
+
+app.use(cors());
+
+const credentials = { key: privateKey, cert: certificate, ca: ca };
+const httpsServer = https.createServer(credentials, app);
 
 const getFormattedDate = () => {
   const now = new Date();
   return `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`;
 };
-app.use(cors());
 
-app.listen(port, '0.0.0.0', () => {
+httpsServer.listen(port, '0.0.0.0', () => {
   console.log(`<Serveur Node écoute sur http://0.0.0.0:${port}>`);
 });
 
 //#region UNITES/CARTE
-app.get('/api/Unites/Terre/GetAll', async (req, res) => {
+httpsServer.get('/api/Unites/Terre/GetAll', async (req, res) => {
   try {
         const unites = await prisma.unites_armee_terre.findMany();
         console.log(`==> SUCCES CARTE | GET ALL PRISMA unites_armee_terre | ${getFormattedDate()} | ${unites.length} Éléments`);
@@ -52,7 +61,7 @@ async function main() {
 //#endregion UNITES/CARTE
 
 //#region ACTUALITES
-app.get('/api/PostTwitter/GetAll', async (req, res) => {
+httpsServer.get('/api/PostTwitter/GetAll', async (req, res) => {
   try {
         const twitterPosts = await prisma.post_twitter.findMany();
         console.log(`==> SUCCES POST TWITTER | GET ALL PRISMA post_twitter | ${getFormattedDate()} | ${twitterPosts.length} Éléments`);
