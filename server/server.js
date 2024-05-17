@@ -25,8 +25,8 @@ const getFormattedDate = () => {
   return `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`;
 };
 
-httpsServer.listen(port, '0.0.0.0', () => {
-  console.log(`<Serveur Node écoute sur http://0.0.0.0:${port}>`);
+httpsServer.listen(port, '82.124.211.87', () => {
+  console.log(`<Serveur Node écoute sur https://82.124.211.87:${port}>`);
 });
 
 //#region UNITES/CARTE
