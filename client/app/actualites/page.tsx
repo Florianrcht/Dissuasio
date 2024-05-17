@@ -14,7 +14,7 @@ const ActualitesPage = () => {
     const [tweets, setTweets] = useState<PostTwitter[]>([])
 
     useEffect(() => {
-        fetch('https://192.168.1.79:3001/api/PostTwitter/GetAll') 
+        fetch('https://82.124.211.87:3001/api/PostTwitter/GetAll') 
             .then(response => response.json())
             .then(data => setTweets(data))
             .catch(error => console.error('Error fetching tweets:', error));
