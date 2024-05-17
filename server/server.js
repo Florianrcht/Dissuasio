@@ -30,7 +30,7 @@ httpsServer.listen(port, '0.0.0.0', () => {
 });
 
 //#region UNITES/CARTE
-app.get('/api/Unites/Terre/GetAll', async (req, res) => {
+app.get('https://82.124.211.87:3001/api/PostTwitter/GetAll', async (req, res) => {
   try {
         const unites = await prisma.unites_armee_terre.findMany();
         console.log(`==> SUCCES CARTE | GET ALL PRISMA unites_armee_terre | ${getFormattedDate()} | ${unites.length} Éléments`);
