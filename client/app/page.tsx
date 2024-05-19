@@ -17,7 +17,6 @@ export default function Home() {
 
   const handleChangeService = (step: number) => {
     const newCount = count + step;
-    console.log(newCount);
 
     if (newCount >= 0 && newCount < services.length) {
       setCount(newCount);

@@ -12,7 +12,10 @@ const Header: React.FC = () => {
                         <a href="/" className="sio">SIO</a>
                     </h1>  
                 </div>
-                <div className='div_a_header'>
+                <div className='div_a_header_mobile'>
+                    <i className="bi bi-list menu_mobile"></i>
+                </div>
+                <div className='div_a_header_pc'>
                     <div>
                         <a className="bouton_header" href="/">Accueil</a>
                     </div>

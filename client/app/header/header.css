@@ -7,6 +7,17 @@
     background-color: #242830;
     height: 70px;
 }
+.menu_mobile{
+  font-size: 50px;
+}
+@media only screen and (max-width: 600px) {
+    .div_a_header_pc{
+        display: none !important;
+    }
+    .div_a_header_mobile{
+      display: block !important;
+    }
+}
 .header_border{
     position: relative;
     border-bottom: solid 1px;
@@ -24,7 +35,10 @@
     border-color: black;
     background-color: rgb(255, 255, 255);*/
 }
-.div_a_header{
+.div_a_header_mobile{
+  display: none;
+}
+.div_a_header_pc{
     display: flex;
     justify-content: space-evenly;
     width: 40%;

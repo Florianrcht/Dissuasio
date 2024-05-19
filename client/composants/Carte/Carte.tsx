@@ -49,7 +49,6 @@ const [unitesArmeeTerre, setUnitesArmeeTerre] = useState<UniteArmeeTerre[]>([]);
       .then(data => setUnitesArmeeTerre(data))
       .catch(error => console.error(error));
   }, []);
-  console.log(unitesArmeeTerre);
 
   const [selectedFilters, setSelectedFilters] = useState<string[]>(["unitesArmeeTerre"]); 
   const filtres = [

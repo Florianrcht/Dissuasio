@@ -22,7 +22,7 @@ const ActualitesPage = () => {
 
     return (
         <>
-            <h1>Actualités</h1>
+            <h1 className="text-white sm:text-black">Actualités</h1>
             <ul>
                 {tweets.map(tweet => (
                     <Tweet key={tweet.id} id={tweet.post_id} />
