@@ -49,15 +49,12 @@ h1{
 .div_1_p{
     border: solid;
     border-radius: 30px;
-    margin-right: 28%;
-    margin-left:8%;
     padding: 25px;
 
 }
 .div_1_button{
     display:flex;
     justify-content: space-evenly;
-    margin-right:20%;
 }
 .div_1_boutons{
     color: black;
@@ -94,6 +91,9 @@ h1{
 }
 .div_2_left{
     flex:1;
+    width:100%;
+    border-radius: 30px;
+    border: solid;
 }
 .div_2_left img{
     height: auto;
