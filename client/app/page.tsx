@@ -2,7 +2,6 @@
 import React from "react";
 import "./page.css";
 import "../public/map_img.png";
-import 'bootstrap-icons/font/bootstrap-icons.css';
 import Image from 'next/image';
 
 export default function Home() {

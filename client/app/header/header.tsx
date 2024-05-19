@@ -1,6 +1,7 @@
 'use client'
 import './header.css';
 import React from 'react';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const Header: React.FC = () => {
 
