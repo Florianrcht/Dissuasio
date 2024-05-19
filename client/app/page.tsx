@@ -45,7 +45,6 @@ export default function Home() {
       <br/>
       <div className="div_1">
         <div className="body_div_1">
-          <div className="gap"></div>
           <div className="div_1_left">
             <h1> &gt;&gt; Dissuasio</h1>
             <br/>
