@@ -44,7 +44,7 @@ const Carte = () => {
 const [unitesArmeeTerre, setUnitesArmeeTerre] = useState<UniteArmeeTerre[]>([]);
 
   useEffect(() => {
-    fetch('https://dissuasio.fr/api/Unites/Terre/GetAll')
+    fetch('https://dissuasio.fr:3001/api/Unites/Terre/GetAll')
       .then(response => response.json())
       .then(data => setUnitesArmeeTerre(data))
       .catch(error => console.error(error));
