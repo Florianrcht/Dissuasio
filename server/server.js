@@ -63,6 +63,7 @@ async function main() {
 
 //#region ACTUALITES
 app.post('/api/PostTwitter/Scrap', async (req, res) => {
+  console.log(req.body);
   const { user, link, content, tags } = req.body;
 
   if (!user || !link || !content || !tags) {

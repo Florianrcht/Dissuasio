@@ -15,12 +15,12 @@ for tweet in tweets["tweets"]:
     user_list.append(tweet['user'])
     link_list.append(tweet['link'])
     content_list.append(tweet['text'])
-    print(content_list)
+    #print(content_list)
 
 for content in content_list:
     tags_list.append(re.findall(r"#(\w+)", content))
 
-print(tags_list)
+#print(tags_list)
 
 jsonData = {
     "user": user_list,
@@ -31,7 +31,10 @@ jsonData = {
 
 headers = {'Content-Type': 'application/json'}
 
-r = requests.post(url="https://dissuasio.fr:3001/api/PostTwitter/Scrap", data=json.dumps(jsonData), headers=headers)
-
+try:
+    r = requests.post(url="https://dissuasio.fr:3001/api/PostTwitter/Scrap", data=json.dumps(jsonData), headers=headers)
+except requests.exceptions.RequestException as e:
+    print("erreur api : "+e)
+    
 print(r.status_code)
 print(r.text)
