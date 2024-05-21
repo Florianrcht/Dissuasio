@@ -1,5 +1,6 @@
 # Ignore les fichiers générés par Node.js
 node_modules/
+venv/
 
 # Ignore les fichiers de configuration spécifiques à l'utilisateur
 .npm

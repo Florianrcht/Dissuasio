@@ -9,7 +9,7 @@ async function main() {
         post_id: '1784122719727997223',
         user: 'OpexNews',
         tags : JSON.stringify([
-            'MGCS',
+            '2MGCS',
             'Leclerc',
             'Chars',
             'Armée de Terre',

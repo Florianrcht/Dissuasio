@@ -7,6 +7,7 @@ const cors = require('cors');
 require('dotenv').config();
 const fs = require('fs');
 const https = require('https');
+const bodyParser = require('body-parser');
 
 let bloqueCharge = 0;
 let compteurUnitesArmeeTerre = 0;
@@ -61,18 +62,34 @@ async function main() {
 //#endregion UNITES/CARTE
 
 //#region ACTUALITES
-app.get('/api/PostTwitter/GetAll', async (req, res) => {
+app.post('/api/PostTwitter/Scrap', async (req, res) => {
+  const { user, link, content, tags } = req.body;
+
+  if (!user || !link || !content || !tags) {
+    return res.status(400).send("Les données envoyées sont incorrectes.");
+  }
+
+  const dataToInsert = user.map((usr, index) => ({
+    post_id: link[index].split('/').pop(), // Assuming the post_id can be derived from the link
+    user: usr,
+    content: content[index],
+    tags: JSON.stringify(tags[index])
+  }));
+
   try {
-        const twitterPosts = await prisma.post_twitter.findMany();
-        console.log(`==> SUCCES POST TWITTER | GET ALL PRISMA post_twitter | ${getFormattedDate()} | ${twitterPosts.length} Éléments`);
-      try {
-        res.json(twitterPosts);
-        console.log(`//> SUCCES POST TWITTER | SEND /api/PostTwitter/GetAll  | ${getFormattedDate()} | ${twitterPosts.length} Éléments`);
-      }
-      catch (e) {
-        console.log(`<// ERREUR POST TWITTER | GET /api/PostTwitter/GetAll    | ${getFormattedDate()}  | ${twitterPosts.length} Éléments | ` + e.message);
-        throw e;
-      }
+    const inserts = dataToInsert.map(data => prisma.post_twitter.create({ data }));
+    await prisma.$transaction(inserts);
+    console.log(`==> SUCCES POST TWITTER | INSERTION | ${getFormattedDate()} | ${dataToInsert.length} Éléments`);
+    res.status(200).send("Insertions réussies.");
+  } catch (error) {
+    console.error('Erreur lors des insertions :', error);
+    res.status(500).send("Erreur lors des insertions.");
+  }
+});
+
+app.get('/api/PostTwitter/Scrap', async (req, res) => {
+  try {
+    console.log(req);
     }
   catch (e) {
     console.log('<== ERREUR | GET PRISMA post_twitter | ' + e.message);
