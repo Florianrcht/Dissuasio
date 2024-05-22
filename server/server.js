@@ -65,12 +65,8 @@ async function main() {
 //#region ACTUALITES
 app.post('/api/PostTwitter/Scrap', async (req, res) => {
   console.log(req.body);
-  const { user, link, content, tags } = req.body;
 
-  if (!user || !link || !content || !tags) {
-    return res.status(400).send("Les données envoyées sont incorrectes.");
-  }
-
+  /*
   const dataToInsert = user.map((usr, index) => ({
     post_id: link[index].split('/').pop(), // Assuming the post_id can be derived from the link
     user: usr,
@@ -86,7 +82,7 @@ app.post('/api/PostTwitter/Scrap', async (req, res) => {
   } catch (error) {
     console.error('Erreur lors des insertions :', error);
     res.status(500).send("Erreur lors des insertions.");
-  }
+  }*/
 });
 
 app.get('/api/PostTwitter/Scrap', async (req, res) => {
