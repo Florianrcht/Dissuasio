@@ -17,6 +17,7 @@ const certificate = fs.readFileSync('/etc/letsencrypt/live/dissuasio.fr/cert.pem
 const ca = fs.readFileSync('/etc/letsencrypt/live/dissuasio.fr/chain.pem', 'utf8');
 
 app.use(cors());
+app.use(express.json());
 
 const credentials = { key: privateKey, cert: certificate, ca: ca };
 const httpsServer = https.createServer(credentials, app);
