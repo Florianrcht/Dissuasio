@@ -65,6 +65,8 @@ async function main() {
 //#region ACTUALITES
 app.post('/api/PostTwitter/Scrap', async (req, res) => {
   console.log(req.body);
+  const twitterPosts = await prisma.post_twitter.findMany();
+  console.log(twitterPosts);
 
   /*
   const dataToInsert = user.map((usr, index) => ({
