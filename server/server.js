@@ -64,10 +64,12 @@ async function main() {
 
 //#region ACTUALITES
 app.post('/api/PostTwitter/Scrap', async (req, res) => {
-  console.log(req.body);
   const twitterPosts = await prisma.post_twitter.findMany();
-  console.log(twitterPosts);
-
+  for (let i = 0; i < req.body.length; i++) {
+    print(req.body[i]);
+    print("-----------------Prochain-----------------");
+  }
+  
   /*
   const dataToInsert = user.map((usr, index) => ({
     post_id: link[index].split('/').pop(), // Assuming the post_id can be derived from the link
@@ -85,16 +87,6 @@ app.post('/api/PostTwitter/Scrap', async (req, res) => {
     console.error('Erreur lors des insertions :', error);
     res.status(500).send("Erreur lors des insertions.");
   }*/
-});
-
-app.get('/api/PostTwitter/Scrap', async (req, res) => {
-  try {
-    console.log(req);
-    }
-  catch (e) {
-    console.log('<== ERREUR | GET PRISMA post_twitter | ' + e.message);
-    throw e;
-  }
 });
 
 
