@@ -65,9 +65,10 @@ async function main() {
 //#region ACTUALITES
 app.post('/api/PostTwitter/Scrap', async (req, res) => {
   const twitterPosts = await prisma.post_twitter.findMany();
+  
   for (let i = 0; i < req.body.length; i++) {
-    print(req.body[i]);
-    print("-----------------Prochain-----------------");
+    console.log(req.body[i]);
+    console.log("-----------------Prochain-----------------");
   }
   
   /*
