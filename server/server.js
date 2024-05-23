@@ -70,7 +70,7 @@ app.post('/api/PostTwitter/Scrap', async (req, res) => {
   for (let i = 0; i < req.body.tweets.length; i++) {
     if (twitterPostIdDb.includes(req.body.tweets[i].post_id)) {
       console.log(req.body.tweets[i]);
-      console.log(`==> ERREUR POST TWITTER | POST ID DÉJÀ PRÉSENT | ${getFormattedDate()} | `);
+      console.log(`==> ERREUR POST TWITTER | POST ID DÉJÀ PRÉSENT | ${getFormattedDate()} | ${post_id}`);
       console.log("-----------------Prochain-----------------");
       continue;
     } else {
@@ -82,40 +82,24 @@ app.post('/api/PostTwitter/Scrap', async (req, res) => {
         console.log(post_id);
         console.log(user);  
         console.log(tags);
-        console.log(`==> SUCCES POST TWITTER | INSERTION | ${getFormattedDate()} | `);
-        
-        await prisma.post_twitter.create({
-          data: {
-            post_id: post_id,
-            user: user,
-            tags: JSON.stringify(tags)
-          }
-        });
-        console.log(`==> SUCCES POST TWITTER | INSERTION | ${getFormattedDate()} | ${req.body.tweets[i].post_id}`);
+
+        const data = {
+          post_id: post_id,
+          user: user,
+          tags: JSON.stringify(tags)
+        }
+
+        const inserts = prisma.post_twitter.create({ data });
+        await prisma.$transaction(inserts);
+
+        console.log(`==> SUCCES POST TWITTER | INSERTION | ${getFormattedDate()} | ${post_id}`);
       } catch (e) {
-        console.log(`<== ERREUR POST TWITTER | INSERTION | ${getFormattedDate()} | ${req.body.tweets[i].post_id} | ` + e.message);
+        console.log(`<== ERREUR POST TWITTER | INSERTION | ${getFormattedDate()} | ${post_id} | ` + e.message);
         throw e;
       }
     }
   }
-  
-  /*
-  const dataToInsert = user.map((usr, index) => ({
-    post_id: link[index].split('/').pop(), // Assuming the post_id can be derived from the link
-    user: usr,
-    content: content[index],
-    tags: JSON.stringify(tags[index])
-  }));
-
-  try {
-    const inserts = dataToInsert.map(data => prisma.post_twitter.create({ data }));
-    await prisma.$transaction(inserts);
-    console.log(`==> SUCCES POST TWITTER | INSERTION | ${getFormattedDate()} | ${dataToInsert.length} Éléments`);
-    res.status(200).send("Insertions réussies.");
-  } catch (error) {
-    console.error('Erreur lors des insertions :', error);
-    res.status(500).send("Erreur lors des insertions.");
-  }*/
+  res.send('OK insertion réussie');
 });
 
 
