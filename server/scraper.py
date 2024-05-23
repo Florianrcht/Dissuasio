@@ -33,7 +33,7 @@ finally:
 # Scraping tweets from DGA
 try:
     print('<<<--Scraping DGA[3] tweets-->>>')
-    tweetsDGA = scraper.get_tweets("DGA", mode='user', number=2)
+    tweetsDGA = scraper.get_tweets("DGA", mode='user', number=20)
     print('DGA[3] => Réussi')
 except requests.exceptions.RequestException as e:
     print('DGA[3] => Erreur')
@@ -52,7 +52,6 @@ transformed_json = {
 }
 
 headers = {'Content-Type': 'application/json'}
-print(transformed_json)
 try:
     r = requests.post(url="https://dissuasio.fr:3001/api/PostTwitter/Scrap", json=transformed_json, headers=headers)
     print(r.status_code)
