@@ -66,8 +66,8 @@ async function main() {
 app.post('/api/PostTwitter/Scrap', async (req, res) => {
   const twitterPosts = await prisma.post_twitter.findMany();
   console.log("test")
-  console.log(req.body);
-  for (let i = 0; i < req.body.length; i++) {
+  console.log(req.body.tweets);
+  for (let i = 0; i < req.body.tweets.length; i++) {
     console.log(req.body[i]);
     console.log("-----------------Prochain-----------------");
   }
