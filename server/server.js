@@ -102,7 +102,7 @@ app.post('/api/PostTwitter/Scrap', async (req, res) => {
 app.get('/api/PostTwitter/GetAll', async (req, res) => {
   const twitterPosts = await prisma.post_twitter.findMany();
   console.log(`==> SUCCES POST TWITTER | GET ALL PRISMA post_twitter | ${getFormattedDate()} | ${twitterPosts.length} Éléments`);
-  const allTagsTwitterPosts = twitterPosts.map(post => JSON.parse(post.tags)).flat();
+  let allTagsTwitterPosts = twitterPosts.map(post => JSON.parse(post.tags)).flat();
   allTagsTwitterPosts = [...new Set(allTagsTwitterPosts)];
   console;log(allTagsTwitterPosts)
   try {
