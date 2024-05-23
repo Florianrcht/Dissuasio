@@ -103,6 +103,8 @@ app.get('/api/PostTwitter/GetAll', async (req, res) => {
   const twitterPosts = await prisma.post_twitter.findMany();
   console.log(`==> SUCCES POST TWITTER | GET ALL PRISMA post_twitter | ${getFormattedDate()} | ${twitterPosts.length} Éléments`);
   console.log(twitterPosts);
+  const allTagsTwitterPosts = twitterPosts.map(post => JSON.parse(post.tags)).flat();
+  console.log(allTagsTwitterPosts);
   try {
     res.json(twitterPosts);
     console.log(`//> SUCCES POST TWITTER | SEND /api/PostTwitter/GetAll  | ${getFormattedDate()} | ${twitterPosts.length} Éléments`);
