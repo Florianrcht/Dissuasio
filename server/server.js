@@ -72,7 +72,7 @@ app.post('/api/PostTwitter/Scrap', async (req, res) => {
 
     const reqTweets = req.body.req_tweets;
     const tweets = reqTweets.flatMap(item => item.tweets);
-    
+
     const twitterPosts = await prisma.post_twitter.findMany();
     const twitterPostIdDb = twitterPosts.map(post => post.post_id);
 
@@ -98,6 +98,7 @@ app.post('/api/PostTwitter/Scrap', async (req, res) => {
     res.status(500).send("Erreur lors des insertions.");
   }
 });
+
 
 app.get('/api/PostTwitter/GetAll', async (req, res) => {
   const twitterPosts = await prisma.post_twitter.findMany();
