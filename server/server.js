@@ -65,19 +65,15 @@ async function main() {
 //#region ACTUALITES
 app.post('/api/PostTwitter/Scrap', async (req, res) => {
   try {
-    // Vérifiez si le corps de la requête contient des tweets
     if (!req.body.tweets || !Array.isArray(req.body.tweets)) {
       return res.status(400).send("Les données envoyées sont incorrectes.");
     }
 
-    // Extraire les tweets du corps de la requête
     const tweets = req.body.tweets;
     
-    // Récupérer les identifiants des posts existants
     const twitterPosts = await prisma.post_twitter.findMany();
     const twitterPostIdDb = twitterPosts.map(post => post.post_id);
     
-    // Préparer les données pour insertion
     const dataToInsert = tweets
       .map(tweet => ({
         post_id: tweet.link.split('/').pop(),
@@ -89,9 +85,6 @@ app.post('/api/PostTwitter/Scrap', async (req, res) => {
       console.log("==> Aucune nouvelle insertion requise | Tous les posts sont déjà présents");
       return res.status(200).send("Aucune insertion requise.");
     }
-    cons
-    // Insérer les données dans la base de données
-    console.log(dataToInsert)
     const inserts = dataToInsert.map(data => prisma.post_twitter.create({ data }));
     await prisma.$transaction(inserts);
     
@@ -100,6 +93,19 @@ app.post('/api/PostTwitter/Scrap', async (req, res) => {
   } catch (error) {
     console.error('Erreur lors des insertions :', error);
     res.status(500).send("Erreur lors des insertions.");
+  }
+});
+
+app.get('/api/PostTwitter/GetAll', async (req, res) => {
+  const twitterPosts = await prisma.post_twitter.findMany();
+  console.log(`==> SUCCES POST TWITTER | GET ALL PRISMA post_twitter | ${getFormattedDate()} | ${twitterPosts.length} Éléments`);
+  try {
+    res.json(twitterPosts);
+    console.log(`//> SUCCES POST TWITTER | SEND /api/PostTwitter/GetAll  | ${getFormattedDate()} | ${twitterPosts.length} Éléments`);
+  }
+  catch (e) {
+    console.log(`<// ERREUR POST TWITTER | GET /api/PostTwitter/GetAll    | ${getFormattedDate()}  | ${twitterPosts.length} Éléments | ` + e.message);
+    throw e;
   }
 });
 
