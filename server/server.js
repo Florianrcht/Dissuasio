@@ -83,17 +83,16 @@ app.post('/api/PostTwitter/Scrap', async (req, res) => {
         console.log(user);  
         console.log(tags);
         console.log(`==> SUCCES POST TWITTER | INSERTION | ${getFormattedDate()} | `);
-        /*
+        
         await prisma.post_twitter.create({
           data: {
-            post_id: req.body.tweets[i].link.split('/').pop(),
-            user: req.body.tweets[i].user,
-            content: req.body.tweets[i].content,
-            tags: JSON.stringify(req.body.tweets[i].tags)
+            post_id: post_id,
+            user: user,
+            tags: JSON.stringify(tags)
           }
         });
         console.log(`==> SUCCES POST TWITTER | INSERTION | ${getFormattedDate()} | ${req.body.tweets[i].post_id}`);
-      */} catch (e) {
+      } catch (e) {
         console.log(`<== ERREUR POST TWITTER | INSERTION | ${getFormattedDate()} | ${req.body.tweets[i].post_id} | ` + e.message);
         throw e;
       }
