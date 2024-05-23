@@ -77,7 +77,11 @@ app.post('/api/PostTwitter/Scrap', async (req, res) => {
       try {
         console.log(req.body.tweets[i]);
         const post_id = req.body.tweets[i].link.split('/').pop();
+        const user = req.body.tweets[i].user['username'];
+        const tags = tweet.text.match(/#\w+/g) || [];
         console.log(post_id);
+        console.log(user);  
+        console.log(tags);
         console.log(`==> SUCCES POST TWITTER | INSERTION | ${getFormattedDate()} | `);
         /*
         await prisma.post_twitter.create({
