@@ -64,21 +64,21 @@ async function main() {
 
 //#region ACTUALITES
 app.post('/api/PostTwitter/Scrap', async (req, res) => {
-  console.log(req.body)
+  console.log(req.body, null, 2)
   try {
     if (!req.body.req_tweets || !Array.isArray(req.body.req_tweets)) {
       return res.status(400).send("Les données envoyées sont incorrectes.");
     }
 
     const reqTweets = req.body.req_tweets;
-    const tweets = reqTweets.flatMap(item => item.tweets);
+    const tweets = reqTweets.flatMap(item => item.tweets.tweets);
 
     const twitterPosts = await prisma.post_twitter.findMany();
     const twitterPostIdDb = twitterPosts.map(post => post.post_id);
 
     const dataToInsert = tweets
-      .filter(tweet => !twitterPostIdDb.includes(tweet.link.split('/').pop()))
-      .map(tweet => ({
+    .filter(tweet => tweet.link && !twitterPostIdDb.includes(tweet.link.split('/').pop()))
+    .map(tweet => ({
         post_id: tweet.link.split('/').pop(),
         user: tweet.user['username'],
         tags: JSON.stringify(tweet.text.match(/[#@]\w+/g) || [])
