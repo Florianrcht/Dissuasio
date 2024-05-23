@@ -64,6 +64,7 @@ async function main() {
 
 //#region ACTUALITES
 app.post('/api/PostTwitter/Scrap', async (req, res) => {
+  console.log(req.body)
   try {
     if (!req.body.tweets || !Array.isArray(req.body.tweets)) {
       return res.status(400).send("Les données envoyées sont incorrectes.");
