@@ -75,26 +75,19 @@ app.post('/api/PostTwitter/Scrap', async (req, res) => {
     const twitterPostIdDb = twitterPosts.map(post => post.post_id);
 
     const dataToInsert = tweets
+      .filter(tweet => !twitterPostIdDb.includes(tweet.link.split('/').pop()))
       .map(tweet => ({
         post_id: tweet.link.split('/').pop(),
         user: tweet.user['username'],
         tags: JSON.stringify(tweet.text.match(/#\w+/g) || [])
       }));
-      
-      for (let i = 0; i < dataToInsert.length; i++) {
-        if (twitterPostIdDb.includes(dataToInsert[i].post_id)) {
-          dataToInsert.splice(i, 1);
-          i--;
-        }
-      }
-      console.log(dataToInsert);
     
     if (dataToInsert.length === 0) {
       console.log("==> Aucune nouvelle insertion requise | Tous les posts sont déjà présents");
       return res.status(200).send("Aucune insertion requise.");
     }
     const inserts = dataToInsert.map(data => prisma.post_twitter.create({ data }));
-    //await prisma.$transaction(inserts);
+    await prisma.$transaction(inserts);
     
     console.log(`==> SUCCES POST TWITTER | INSERTION | ${getFormattedDate()} | ${dataToInsert.length} Éléments`);
     res.status(200).send("Insertions réussies.");
