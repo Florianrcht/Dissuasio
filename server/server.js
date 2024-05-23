@@ -79,7 +79,6 @@ app.post('/api/PostTwitter/Scrap', async (req, res) => {
     
     // Préparer les données pour insertion
     const dataToInsert = tweets
-      .filter(tweet => !twitterPostIdDb.includes(tweet.link.split('/').pop()))
       .map(tweet => ({
         post_id: tweet.link.split('/').pop(),
         user: tweet.user['username'],
