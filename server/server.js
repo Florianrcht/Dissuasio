@@ -104,7 +104,7 @@ app.get('/api/PostTwitter/GetAll', async (req, res) => {
   console.log(`==> SUCCES POST TWITTER | GET ALL PRISMA post_twitter | ${getFormattedDate()} | ${twitterPosts.length} Éléments`);
   let allTagsTwitterPosts = twitterPosts.map(post => JSON.parse(post.tags)).flat();
   allTagsTwitterPosts = [...new Set(allTagsTwitterPosts)];
-  console;log(allTagsTwitterPosts)
+  console.log(allTagsTwitterPosts)
   try {
     res.json(twitterPosts);
     console.log(`//> SUCCES POST TWITTER | SEND /api/PostTwitter/GetAll  | ${getFormattedDate()} | ${twitterPosts.length} Éléments`);
