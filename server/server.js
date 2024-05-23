@@ -89,8 +89,9 @@ app.post('/api/PostTwitter/Scrap', async (req, res) => {
       console.log("==> Aucune nouvelle insertion requise | Tous les posts sont déjà présents");
       return res.status(200).send("Aucune insertion requise.");
     }
-    
+    cons
     // Insérer les données dans la base de données
+    console.log(dataToInsert)
     const inserts = dataToInsert.map(data => prisma.post_twitter.create({ data }));
     await prisma.$transaction(inserts);
     
