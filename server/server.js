@@ -66,11 +66,12 @@ async function main() {
 app.post('/api/PostTwitter/Scrap', async (req, res) => {
   console.log(req.body)
   try {
-    if (!req.body.tweets || !Array.isArray(req.body.tweets)) {
+    if (!req.body.req_tweets || !Array.isArray(req.body.req_tweets)) {
       return res.status(400).send("Les données envoyées sont incorrectes.");
     }
 
-    const tweets = req.body.tweets;
+    const reqTweets = req.body.req_tweets;
+    const tweets = reqTweets.flatMap(item => item.tweets);
     
     const twitterPosts = await prisma.post_twitter.findMany();
     const twitterPostIdDb = twitterPosts.map(post => post.post_id);

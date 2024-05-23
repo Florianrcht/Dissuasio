@@ -52,9 +52,9 @@ transformed_json = {
 }
 
 headers = {'Content-Type': 'application/json'}
-print(tweets)
+print(transformed_json)
 try:
-    r = requests.post(url="https://dissuasio.fr:3001/api/PostTwitter/Scrap", json=tweets, headers=headers)
+    r = requests.post(url="https://dissuasio.fr:3001/api/PostTwitter/Scrap", json=transformed_json, headers=headers)
     print(r.status_code)
     print(r.text)
 except requests.exceptions.RequestException as e:
