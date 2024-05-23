@@ -16,7 +16,7 @@ async function main() {
         ])
     }   
     ];
-
+    
     const inserts = datas.map(data => prisma.post_twitter.create({ data }));
 
     try {

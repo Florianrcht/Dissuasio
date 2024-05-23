@@ -64,44 +64,43 @@ async function main() {
 
 //#region ACTUALITES
 app.post('/api/PostTwitter/Scrap', async (req, res) => {
-  const twitterPosts = await prisma.post_twitter.findMany(10);
-  const twitterPostIdDb = twitterPosts.map(post => post.post_id);
-
-  for (let i = 0; i < req.body.tweets.length; i++) {
-    if (twitterPostIdDb.includes(req.body.tweets[i].post_id)) {
-      console.log(req.body.tweets[i]);
-      console.log(`==> ERREUR POST TWITTER | POST ID DÉJÀ PRÉSENT | ${getFormattedDate()} | `);
-      console.log("-----------------Prochain-----------------");
-      continue;
-    } else {
-      try {
-        console.log(req.body.tweets[i]);
-        const post_id = req.body.tweets[i].link.split('/').pop();
-        const user = req.body.tweets[i].user['username'];
-        const tags = req.body.tweets[i].text.match(/#\w+/g) || [];
-        console.log(post_id);
-        console.log(user);  
-        console.log(tags);
-
-        const data = {
-          post_id: post_id,
-          user: user,
-          tags: JSON.stringify(tags)
-        }
-        console.log("data : ");
-        console.log(data);
-
-        const inserts = prisma.post_twitter.create({ data });
-        await prisma.$transaction(inserts);
-
-        console.log(`==> SUCCES POST TWITTER | INSERTION | ${getFormattedDate()} | `);
-      } catch (e) {
-        console.log(`<== ERREUR POST TWITTER | INSERTION | ${getFormattedDate()} | ` + e.message);
-        throw e;
-      }
+  try {
+    // Vérifiez si le corps de la requête contient des tweets
+    if (!req.body.tweets || !Array.isArray(req.body.tweets)) {
+      return res.status(400).send("Les données envoyées sont incorrectes.");
     }
+
+    // Extraire les tweets du corps de la requête
+    const tweets = req.body.tweets;
+    
+    // Récupérer les identifiants des posts existants
+    const twitterPosts = await prisma.post_twitter.findMany();
+    const twitterPostIdDb = twitterPosts.map(post => post.post_id);
+    
+    // Préparer les données pour insertion
+    const dataToInsert = tweets
+      .filter(tweet => !twitterPostIdDb.includes(tweet.link.split('/').pop()))
+      .map(tweet => ({
+        post_id: tweet.link.split('/').pop(),
+        user: tweet.user['username'],
+        tags: JSON.stringify(tweet.text.match(/#\w+/g) || [])
+      }));
+    
+    if (dataToInsert.length === 0) {
+      console.log("==> Aucune nouvelle insertion requise | Tous les posts sont déjà présents");
+      return res.status(200).send("Aucune insertion requise.");
+    }
+    
+    // Insérer les données dans la base de données
+    const inserts = dataToInsert.map(data => prisma.post_twitter.create({ data }));
+    await prisma.$transaction(inserts);
+    
+    console.log(`==> SUCCES POST TWITTER | INSERTION | ${getFormattedDate()} | ${dataToInsert.length} Éléments`);
+    res.status(200).send("Insertions réussies.");
+  } catch (error) {
+    console.error('Erreur lors des insertions :', error);
+    res.status(500).send("Erreur lors des insertions.");
   }
-  res.send('OK insertion réussie');
 });
 
 
