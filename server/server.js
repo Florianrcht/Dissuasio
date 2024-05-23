@@ -79,7 +79,7 @@ app.post('/api/PostTwitter/Scrap', async (req, res) => {
       .map(tweet => ({
         post_id: tweet.link.split('/').pop(),
         user: tweet.user['username'],
-        tags: JSON.stringify(tweet.text.match(/#\w+/g) || [])
+        tags: JSON.stringify(tweet.text.match(/[#@]\w+/g) || [])
       }));
     
     if (dataToInsert.length === 0) {

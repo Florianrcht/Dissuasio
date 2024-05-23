@@ -4,8 +4,15 @@ import requests
 import json
 
 scraper = Nitter()
+tweets = ""
 
-tweets = scraper.get_tweets("OpexNews", mode='user', number=10)
+tweetsOpexNews = scraper.get_tweets("OpexNews", mode='user', number=20)
+tweetsEtatMajorFR = scraper.get_tweets("EtatMajorFR", mode='user', number=20)
+tweetsDGA = scraper.get_tweets("DGA", mode='user', number=20)
+
+tweets += tweetsOpexNews
+tweets += tweetsEtatMajorFR
+tweets += tweetsDGA
 
 headers = {'Content-Type': 'application/json'}
 
