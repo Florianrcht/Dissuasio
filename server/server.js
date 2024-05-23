@@ -70,7 +70,7 @@ app.post('/api/PostTwitter/Scrap', async (req, res) => {
   for (let i = 0; i < req.body.tweets.length; i++) {
     if (twitterPostIdDb.includes(req.body.tweets[i].post_id)) {
       console.log(req.body.tweets[i]);
-      console.log(`==> ERREUR POST TWITTER | POST ID DÉJÀ PRÉSENT | ${getFormattedDate()} | ${post_id}`);
+      console.log(`==> ERREUR POST TWITTER | POST ID DÉJÀ PRÉSENT | ${getFormattedDate()} | `);
       console.log("-----------------Prochain-----------------");
       continue;
     } else {
@@ -92,9 +92,9 @@ app.post('/api/PostTwitter/Scrap', async (req, res) => {
         const inserts = prisma.post_twitter.create({ data });
         await prisma.$transaction(inserts);
 
-        console.log(`==> SUCCES POST TWITTER | INSERTION | ${getFormattedDate()} | ${data.post_id}`);
+        console.log(`==> SUCCES POST TWITTER | INSERTION | ${getFormattedDate()} | `);
       } catch (e) {
-        console.log(`<== ERREUR POST TWITTER | INSERTION | ${getFormattedDate()} | ${data.post_id} | ` + e.message);
+        console.log(`<== ERREUR POST TWITTER | INSERTION | ${getFormattedDate()} | ` + e.message);
         throw e;
       }
     }
