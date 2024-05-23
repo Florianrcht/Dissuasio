@@ -9,7 +9,7 @@ tweets = []
 # Scraping tweets from OpexNews
 try:
     print('<<<--Scraping OpexNews[1] tweets-->>>')
-    tweetsOpexNews = scraper.get_tweets("OpexNews", mode='user', number=2)
+    tweetsOpexNews = scraper.get_tweets("OpexNews", mode='user', number=20)
     print('OpexNews[1] => Réussi')     
 except requests.exceptions.RequestException as e:
     print('OpexNews[1] => Erreur')     
@@ -21,7 +21,7 @@ finally:
 # Scraping tweets from EtatMajorFR
 try:
     print('<<<--Scraping EtatMajorFR[2] tweets-->>>')
-    tweetsEtatMajorFR = scraper.get_tweets("EtatMajorFR", mode='user', number=2)
+    tweetsEtatMajorFR = scraper.get_tweets("EtatMajorFR", mode='user', number=20)
     print('EtatMajorFR[2] => Réussi')
 except requests.exceptions.RequestException as e:
     print('EtatMajorFR[2] => Erreur')
