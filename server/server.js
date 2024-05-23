@@ -64,12 +64,36 @@ async function main() {
 
 //#region ACTUALITES
 app.post('/api/PostTwitter/Scrap', async (req, res) => {
-  const twitterPosts = await prisma.post_twitter.findMany();
-  console.log("test")
-  console.log(req.body.tweets);
+  const twitterPosts = await prisma.post_twitter.findMany(10);
+  const twitterPostIdDb = twitterPosts.map(post => post.post_id);
+
   for (let i = 0; i < req.body.tweets.length; i++) {
-    console.log(req.body[i]);
-    console.log("-----------------Prochain-----------------");
+    if (twitterPostIdDb.includes(req.body.tweets[i].post_id)) {
+      console.log(req.body.tweets[i]);
+      console.log(`==> ERREUR POST TWITTER | POST ID DÉJÀ PRÉSENT | ${getFormattedDate()} | `);
+      console.log("-----------------Prochain-----------------");
+      continue;
+    } else {
+      try {
+        console.log(req.body.tweets[i]);
+        const post_id = req.body.tweets[i].link.split('/').pop();
+        console.log(post_id);
+        console.log(`==> SUCCES POST TWITTER | INSERTION | ${getFormattedDate()} | `);
+        /*
+        await prisma.post_twitter.create({
+          data: {
+            post_id: req.body.tweets[i].link.split('/').pop(),
+            user: req.body.tweets[i].user,
+            content: req.body.tweets[i].content,
+            tags: JSON.stringify(req.body.tweets[i].tags)
+          }
+        });
+        console.log(`==> SUCCES POST TWITTER | INSERTION | ${getFormattedDate()} | ${req.body.tweets[i].post_id}`);
+      */} catch (e) {
+        console.log(`<== ERREUR POST TWITTER | INSERTION | ${getFormattedDate()} | ${req.body.tweets[i].post_id} | ` + e.message);
+        throw e;
+      }
+    }
   }
   
   /*
