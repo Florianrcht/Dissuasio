@@ -5,7 +5,7 @@ import json
 
 scraper = Nitter()
 
-tweets = scraper.get_tweets("OpexNews", mode='user', number=10)
+tweets = scraper.get_tweets("OpexNews", mode='user', number=12)
 
 headers = {'Content-Type': 'application/json'}
 
