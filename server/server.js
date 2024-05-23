@@ -73,8 +73,9 @@ app.post('/api/PostTwitter/Scrap', async (req, res) => {
     
     const twitterPosts = await prisma.post_twitter.findMany();
     const twitterPostIdDb = twitterPosts.map(post => post.post_id);
-    console.log(twitterPostIdDb);
+
     const dataToInsert = tweets
+      .filter(tweet => !twitterPostIdDb.includes(tweet.link.split('/').pop()))
       .map(tweet => ({
         post_id: tweet.link.split('/').pop(),
         user: tweet.user['username'],
