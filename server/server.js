@@ -88,7 +88,8 @@ app.post('/api/PostTwitter/Scrap', async (req, res) => {
           user: user,
           tags: JSON.stringify(tags)
         }
-        console.log("data : "+ data);
+        console.log("data : ");
+        console.log(data);
 
         const inserts = prisma.post_twitter.create({ data });
         await prisma.$transaction(inserts);
