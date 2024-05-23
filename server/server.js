@@ -73,7 +73,7 @@ app.post('/api/PostTwitter/Scrap', async (req, res) => {
     
     const twitterPosts = await prisma.post_twitter.findMany();
     const twitterPostIdDb = twitterPosts.map(post => post.post_id);
-    
+    console.log(twitterPostIdDb);
     const dataToInsert = tweets
       .map(tweet => ({
         post_id: tweet.link.split('/').pop(),
@@ -86,7 +86,7 @@ app.post('/api/PostTwitter/Scrap', async (req, res) => {
       return res.status(200).send("Aucune insertion requise.");
     }
     const inserts = dataToInsert.map(data => prisma.post_twitter.create({ data }));
-    await prisma.$transaction(inserts);
+    //await prisma.$transaction(inserts);
     
     console.log(`==> SUCCES POST TWITTER | INSERTION | ${getFormattedDate()} | ${dataToInsert.length} Éléments`);
     res.status(200).send("Insertions réussies.");
