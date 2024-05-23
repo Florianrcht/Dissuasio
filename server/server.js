@@ -92,9 +92,9 @@ app.post('/api/PostTwitter/Scrap', async (req, res) => {
         const inserts = prisma.post_twitter.create({ data });
         await prisma.$transaction(inserts);
 
-        console.log(`==> SUCCES POST TWITTER | INSERTION | ${getFormattedDate()} | ${post_id}`);
+        console.log(`==> SUCCES POST TWITTER | INSERTION | ${getFormattedDate()} | ${data.post_id}`);
       } catch (e) {
-        console.log(`<== ERREUR POST TWITTER | INSERTION | ${getFormattedDate()} | ${post_id} | ` + e.message);
+        console.log(`<== ERREUR POST TWITTER | INSERTION | ${getFormattedDate()} | ${data.post_id} | ` + e.message);
         throw e;
       }
     }
