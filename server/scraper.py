@@ -41,6 +41,8 @@ except requests.exceptions.RequestException as e:
 finally:
     print('>>>--Scraping DGA[3] tweets--<<<')
     print('')
+    
+# Scrapo
 
 tweets.append({"tweets": tweetsOpexNews})
 tweets.append({"tweets": tweetsEtatMajorFR})

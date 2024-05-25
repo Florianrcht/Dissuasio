@@ -20,9 +20,19 @@ const ActualitesPage = () => {
             .catch(error => console.error('Error fetching tweets:', error));
     }, []);
 
+    const handleTweetsOrderByDate = () => {
+        const tweetsOrdered = tweets.sort((a, b) => {
+            return new Date(b.post_id).getTime() - new Date(a.post_id).getTime();
+        });
+        setTweets([...tweetsOrdered]);
+    };
+
     return (
         <>
             <h1 className="text-white sm:text-black">Actualités</h1>
+            <button onClick={handleTweetsOrderByDate}>
+                Classer par date
+            </button>
             <ul>
                 {tweets.map(tweet => (
                     <Tweet key={tweet.id} id={tweet.post_id} />

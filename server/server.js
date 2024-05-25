@@ -109,8 +109,6 @@ app.get('/api/PostTwitter/GetAll', async (req, res) => {
   let allUsersTwitterPosts = twitterPosts.map(post => post.user);
   allUsersTwitterPosts = [...new Set(allUsersTwitterPosts)];
 
-  console.log(allUsersTwitterPosts);
-
   try {
     res.json(twitterPosts);
     console.log(`//> SUCCES POST TWITTER | SEND /api/PostTwitter/GetAll  | ${getFormattedDate()} | ${twitterPosts.length} Éléments`);
