@@ -21,6 +21,7 @@ const ActualitesPage = () => {
     }, []);
 
     const handleTweetsOrderByDate = () => {
+        console.log(tweets)
         const tweetsOrdered = tweets.sort((a, b) => {
             return new Date(b.post_id).getTime() - new Date(a.post_id).getTime();
         });
